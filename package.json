@@ -1,0 +1,65 @@
+{
+  "name": "@zoltasoft/api-client",
+  "version": "0.1.0-beta.1",
+  "description": "Framework-neutral TypeScript client for Zolta HTTP APIs.",
+  "license": "MIT",
+  "author": "ZoltaSoft",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoltasoft/api-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zoltasoft/api-client/issues"
+  },
+  "homepage": "https://github.com/zoltasoft/api-client#readme",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "unbuild",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "check": "pnpm test && pnpm lint && pnpm typecheck && pnpm build",
+    "prepack": "pnpm build"
+  },
+  "dependencies": {
+    "ofetch": "^1.5.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@types/node": "^22.15.3",
+    "eslint": "^9.25.1",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.67.0",
+    "unbuild": "^3.5.0",
+    "vitest": "^3.1.2"
+  },
+  "keywords": [
+    "api-client",
+    "typescript",
+    "zolta",
+    "ofetch"
+  ]
+}
+
