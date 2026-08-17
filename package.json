@@ -3,7 +3,7 @@
   "version": "0.1.0-beta.1",
   "description": "Framework-neutral TypeScript client for Zolta HTTP APIs.",
   "license": "MIT",
-  "author": "ZoltaSoft",
+  "author": "Redouane Taleb <https://github.com/redouaneT>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zoltasoft/api-client.git"
