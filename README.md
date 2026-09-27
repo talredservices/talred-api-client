@@ -1,17 +1,17 @@
-# Zolta API Client
+# Service Talred API Client
 
-Framework-neutral TypeScript client for APIs that use the Zolta HTTP response envelope. It provides consistent request headers, typed envelopes, normalized errors, and authentication failure hooks without depending on Nuxt, Laravel, or Zolta Identity.
+Framework-neutral TypeScript client for APIs that use the Zolta HTTP response envelope. It provides consistent request headers, typed envelopes, normalized errors, and authentication failure hooks without depending on Nuxt, Laravel, or Service Talred Identity.
 
 ## Install
 
 ```bash
-pnpm add @zoltasoft/api-client
+pnpm add @talred/api-client
 ```
 
 ## Create a client
 
 ```ts
-import { createZoltaApiClient, type ZoltaApiEnvelope } from '@zoltasoft/api-client'
+import { createZoltaApiClient, type ZoltaApiEnvelope } from '@talred/api-client'
 
 const client = createZoltaApiClient({
   baseURL: 'https://api.example.com',
@@ -27,7 +27,7 @@ The client adds JSON request headers and includes `Authorization` and `X-Interna
 ## Typed errors
 
 ```ts
-import { ZoltaApiError } from '@zoltasoft/api-client'
+import { ZoltaApiError } from '@talred/api-client'
 
 try {
   await client('/api/user')
@@ -61,7 +61,7 @@ const client = createZoltaApiClient({
 })
 ```
 
-For encrypted Nuxt Identity sessions and one-time refresh/retry behavior, use the adapter exported by `@zoltasoft/identity-consumer-nuxt/runtime`.
+For encrypted Nuxt Identity sessions and one-time refresh/retry behavior, use the adapter exported by `@talred/identity-consumer-nuxt/runtime`.
 
 ## Security
 
