@@ -1,6 +1,6 @@
 # Service Talred API Client
 
-Framework-neutral TypeScript client for APIs that use the Zolta HTTP response envelope. It provides consistent request headers, typed envelopes, normalized errors, and authentication failure hooks without depending on Nuxt, Laravel, or Service Talred Identity.
+Framework-neutral TypeScript client for APIs that use the Talred HTTP response envelope. It provides consistent request headers, typed envelopes, normalized errors, and authentication failure hooks without depending on Nuxt, Laravel, or Service Talred Identity.
 
 ## Install
 
@@ -11,15 +11,15 @@ pnpm add @talred/api-client
 ## Create a client
 
 ```ts
-import { createZoltaApiClient, type ZoltaApiEnvelope } from '@talred/api-client'
+import { createTalredApiClient, type TalredApiEnvelope } from '@talred/api-client'
 
-const client = createZoltaApiClient({
+const client = createTalredApiClient({
   baseURL: 'https://api.example.com',
   bearerToken: 'access-token',
   internalToken: 'service-token',
 })
 
-const response = await client<ZoltaApiEnvelope<{ user: User }>>('/api/user')
+const response = await client<TalredApiEnvelope<{ user: User }>>('/api/user')
 ```
 
 The client adds JSON request headers and includes `Authorization` and `X-Internal-Token` only when their values are configured.
@@ -27,12 +27,12 @@ The client adds JSON request headers and includes `Authorization` and `X-Interna
 ## Typed errors
 
 ```ts
-import { ZoltaApiError } from '@talred/api-client'
+import { TalredApiError } from '@talred/api-client'
 
 try {
   await client('/api/user')
 } catch (error) {
-  if (error instanceof ZoltaApiError) {
+  if (error instanceof TalredApiError) {
     error.statusCode
     error.errorCode
     error.fieldErrorsByField
@@ -44,14 +44,14 @@ try {
 }
 ```
 
-Responses that do not use the Zolta envelope are converted into a safe `upstream.error` envelope.
+Responses that do not use the Talred envelope are converted into a safe `upstream.error` envelope.
 
 ## Authentication hooks
 
 The core package does not own token acquisition or refresh. Integrations can react to a `401` through `onUnauthorized`:
 
 ```ts
-const client = createZoltaApiClient({
+const client = createTalredApiClient({
   baseURL,
   bearerToken,
   onUnauthorized: async (error) => {

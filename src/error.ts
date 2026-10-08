@@ -1,22 +1,22 @@
 import type {
-  ZoltaApiEnvelope,
-  ZoltaPublicError,
-  ZoltaPublicErrorBag,
-  ZoltaValidationFieldError,
-  ZoltaValidationFieldErrorsMap,
+  TalredApiEnvelope,
+  TalredPublicError,
+  TalredPublicErrorBag,
+  TalredValidationFieldError,
+  TalredValidationFieldErrorsMap,
 } from './types.js'
 
-function isPublicErrorBag(errors: unknown): errors is ZoltaPublicErrorBag {
+function isPublicErrorBag(errors: unknown): errors is TalredPublicErrorBag {
   return typeof errors === 'object'
     && errors !== null
     && !Array.isArray(errors)
     && 'public' in errors
     && typeof (errors as Record<string, unknown>).public === 'object'
     && (errors as Record<string, unknown>).public !== null
-    && 'code' in (errors as ZoltaPublicErrorBag).public
+    && 'code' in (errors as TalredPublicErrorBag).public
 }
 
-function isValidationFieldError(value: unknown): value is ZoltaValidationFieldError {
+function isValidationFieldError(value: unknown): value is TalredValidationFieldError {
   return typeof value === 'object'
     && value !== null
     && 'type' in value
@@ -25,11 +25,11 @@ function isValidationFieldError(value: unknown): value is ZoltaValidationFieldEr
     && typeof (value as Record<string, unknown>).message === 'string'
 }
 
-function isValidationFieldErrorsMap(value: unknown): value is ZoltaValidationFieldErrorsMap {
+function isValidationFieldErrorsMap(value: unknown): value is TalredValidationFieldErrorsMap {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
 
-function normalizeFieldErrors(errors: ZoltaPublicError['errors']): ZoltaValidationFieldError[] {
+function normalizeFieldErrors(errors: TalredPublicError['errors']): TalredValidationFieldError[] {
   if (!errors) return []
   if (Array.isArray(errors)) return errors.filter(isValidationFieldError)
   if (!isValidationFieldErrorsMap(errors)) return []
@@ -42,7 +42,7 @@ function normalizeFieldErrors(errors: ZoltaPublicError['errors']): ZoltaValidati
   })
 }
 
-export function fallbackZoltaApiEnvelope(statusCode: number, statusText = ''): ZoltaApiEnvelope {
+export function fallbackTalredApiEnvelope(statusCode: number, statusText = ''): TalredApiEnvelope {
   return {
     success: false,
     message: `Upstream API error (${statusCode})`,
@@ -57,17 +57,17 @@ export function fallbackZoltaApiEnvelope(statusCode: number, statusText = ''): Z
   }
 }
 
-export class ZoltaApiError extends Error {
+export class TalredApiError extends Error {
   readonly statusCode: number
   readonly apiMessage: string
   readonly errorCode: string | undefined
-  readonly publicError: ZoltaPublicError | undefined
-  readonly fieldErrors: ZoltaValidationFieldError[]
-  readonly rawEnvelope: ZoltaApiEnvelope
+  readonly publicError: TalredPublicError | undefined
+  readonly fieldErrors: TalredValidationFieldError[]
+  readonly rawEnvelope: TalredApiEnvelope
 
-  constructor(statusCode: number, envelope: ZoltaApiEnvelope) {
+  constructor(statusCode: number, envelope: TalredApiEnvelope) {
     super(envelope.message || `Upstream API error (${statusCode})`)
-    this.name = 'ZoltaApiError'
+    this.name = 'TalredApiError'
     this.statusCode = statusCode
     this.apiMessage = envelope.message ?? ''
     this.rawEnvelope = envelope
@@ -114,4 +114,3 @@ export class ZoltaApiError extends Error {
     }, {})
   }
 }
-

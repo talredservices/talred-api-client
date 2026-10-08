@@ -1,10 +1,10 @@
 import { $fetch } from 'ofetch'
-import { fallbackZoltaApiEnvelope, ZoltaApiError } from './error.js'
-import type { ZoltaApiClientOptions, ZoltaApiEnvelope } from './types.js'
+import { fallbackTalredApiEnvelope, TalredApiError } from './error.js'
+import type { TalredApiClientOptions, TalredApiEnvelope } from './types.js'
 
-export type ZoltaApiFetchClient = typeof $fetch
+export type TalredApiFetchClient = typeof $fetch
 
-export function createZoltaApiClient(options: ZoltaApiClientOptions): ZoltaApiFetchClient {
+export function createTalredApiClient(options: TalredApiClientOptions): TalredApiFetchClient {
   return $fetch.create({
     ...options.fetchOptions,
     baseURL: options.baseURL,
@@ -20,12 +20,11 @@ export function createZoltaApiClient(options: ZoltaApiClientOptions): ZoltaApiFe
       const envelope = body
         && typeof body === 'object'
         && 'success' in body
-        ? body as ZoltaApiEnvelope
-        : fallbackZoltaApiEnvelope(response.status, response.statusText)
-      const error = new ZoltaApiError(response.status, envelope)
+        ? body as TalredApiEnvelope
+        : fallbackTalredApiEnvelope(response.status, response.statusText)
+      const error = new TalredApiError(response.status, envelope)
       if (error.isUnauthorized) await options.onUnauthorized?.(error)
       throw error
     },
-  }) as ZoltaApiFetchClient
+  }) as TalredApiFetchClient
 }
-

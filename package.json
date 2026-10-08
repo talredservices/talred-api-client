@@ -1,17 +1,17 @@
 {
   "name": "@talred/api-client",
-  "version": "0.1.0-beta.2",
-  "description": "Framework-neutral TypeScript client for Zolta HTTP APIs.",
+  "version": "0.1.0-beta.3",
+  "description": "Framework-neutral TypeScript client for Talred HTTP APIs.",
   "license": "MIT",
   "author": "Redouane Taleb <https://github.com/redouaneT>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/talredservices/api-client.git"
+    "url": "git+https://github.com/talredservices/talred-api-client.git"
   },
   "bugs": {
-    "url": "https://github.com/talredservices/api-client/issues"
+    "url": "https://github.com/talredservices/talred-api-client/issues"
   },
-  "homepage": "https://github.com/talredservices/api-client#readme",
+  "homepage": "https://github.com/talredservices/talred-api-client#readme",
   "engines": {
     "node": ">=22.0.0",
     "pnpm": ">=10.0.0"
@@ -58,8 +58,7 @@
   "keywords": [
     "api-client",
     "typescript",
-    "zolta",
+    "talred",
     "ofetch"
   ]
 }
-

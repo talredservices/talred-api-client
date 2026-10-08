@@ -1,6 +1,6 @@
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { createZoltaApiClient, ZoltaApiError } from '../src/index.js'
+import { createTalredApiClient, TalredApiError } from '../src/index.js'
 
 const servers: Array<ReturnType<typeof createServer>> = []
 
@@ -19,7 +19,7 @@ async function serve(handler: (request: IncomingMessage, response: ServerRespons
   return `http://127.0.0.1:${address.port}`
 }
 
-describe('createZoltaApiClient', () => {
+describe('createTalredApiClient', () => {
   it('adds configured service and bearer credentials', async () => {
     const baseURL = await serve((request, response) => {
       response.setHeader('content-type', 'application/json')
@@ -34,7 +34,7 @@ describe('createZoltaApiClient', () => {
         debug: [],
       }))
     })
-    const client = createZoltaApiClient({ baseURL, bearerToken: 'access-token', internalToken: 'service-token' })
+    const client = createTalredApiClient({ baseURL, bearerToken: 'access-token', internalToken: 'service-token' })
     const response = await client<{ data: { authorization: string, internalToken: string } }>('/profile')
 
     expect(response.data).toEqual({ authorization: 'Bearer access-token', internalToken: 'service-token' })
@@ -53,9 +53,9 @@ describe('createZoltaApiClient', () => {
         debug: [],
       }))
     })
-    const client = createZoltaApiClient({ baseURL, onUnauthorized })
+    const client = createTalredApiClient({ baseURL, onUnauthorized })
 
-    await expect(client('/profile')).rejects.toBeInstanceOf(ZoltaApiError)
+    await expect(client('/profile')).rejects.toBeInstanceOf(TalredApiError)
     expect(onUnauthorized).toHaveBeenCalledOnce()
   })
 })

@@ -1,13 +1,12 @@
-export { createZoltaApiClient } from './client.js'
-export type { ZoltaApiFetchClient } from './client.js'
-export { fallbackZoltaApiEnvelope, ZoltaApiError } from './error.js'
+export { createTalredApiClient } from './client.js'
+export type { TalredApiFetchClient } from './client.js'
+export { fallbackTalredApiEnvelope, TalredApiError } from './error.js'
 export type {
-  ZoltaApiClientOptions,
-  ZoltaApiEnvelope,
-  ZoltaErrorBag,
-  ZoltaPublicError,
-  ZoltaPublicErrorBag,
-  ZoltaValidationFieldError,
-  ZoltaValidationFieldErrorsMap,
+  TalredApiClientOptions,
+  TalredApiEnvelope,
+  TalredErrorBag,
+  TalredPublicError,
+  TalredPublicErrorBag,
+  TalredValidationFieldError,
+  TalredValidationFieldErrorsMap,
 } from './types.js'
-
